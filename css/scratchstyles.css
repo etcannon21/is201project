@@ -1,0 +1,82 @@
+h1{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: deeppink;
+    font-weight: 800;
+    margin-top: 75px;
+    padding: 30px;
+    padding-top: 50;
+    font-style: italic;                          
+}
+
+body{
+    background-color: #edcae4;
+}
+a{
+    color: black;
+}
+nav {
+    margin-bottom: 20px; 
+}
+nav a {
+    display: inline-block;
+    margin-right: 20px;
+}
+#corner-link, #new-link { 
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    background-color: deeppink; 
+    color: white; 
+    padding: 10px;
+    border-radius: 5px; 
+    text-decoration: none; 
+    font-family: Arial, sans-serif;
+    padding: 20;
+}
+#corner-link {
+    top: 10px;
+    right: 10px;
+}
+#new-link {
+    top: 50px; /* Move the second link down */
+    right: 10px;}
+#corner-link:hover {
+    background-color: #a00e5b; 
+}
+#new-link:hover {
+    background-color: #a00e5b; 
+}
+#back-to-top {
+    position: relative;
+    bottom: 20px; 
+    background-color: deeppink; 
+    color: white;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+#back-to-top:hover {
+    background-color: #c91977; 
+}
+h2{
+    color: white;
+    font-weight: 500; 
+}
+ol{
+    color: deeppink;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20;
+    line-height: 2;
+}
+ol > li:hover{
+    background-color: white;
+}
+p{
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: larger;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift Wordle</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f7d6e0;
+            color: #5c2a52;
+            margin: 0;
+        }
+        h1 {
+            font-family: 'Cursive', sans-serif;
+            color: #d0116d;
+            margin: 20px 0;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tile {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffe0ec;
+            border: 2px solid #f2a1c1;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .correct {
+            background-color: #4caf50;
+            color: white;
+        }
+        .present {
+            background-color: #ffc107;
+            color: white;
+        }
+        .absent {
+            background-color: #f44336;
+            color: white;
+        }
+        input[type="text"] {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #d0116d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b00e5a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Taylor Swift Wordle</h1>
+    <p>Guess the 5-letter Taylor Swift-related word!</p>
+    <div id="game-board"></div>
+    <input type="text" id="guess-input" maxlength="5" placeholder="Enter your guess" />
+    <button id="submit-guess">Submit Guess</button>
+    <p id="message"></p>
+    <script>
+  const words = ["swift", "lover", "style", "begin", "shake", "karma", "speak", "music", "heart", "guitar", "dream", "tears", "begin", "dress", "roses", "style", "betty", "piano", "voice", "rings", "stars"]; // Taylor Swift-themed words
+const answer = words[Math.floor(Math.random() * words.length)]; // Random word
+let currentRow = 0;
+
+const board = document.getElementById('game-board');
+const input = document.getElementById('guess-input');
+const submit = document.getElementById('submit-guess');
+const message = document.getElementById('message');
+
+// Initialize game board
+function initializeBoard() {
+    for (let i = 0; i < 6; i++) { // 6 rows for guesses
+        for (let j = 0; j < 5; j++) { // 5 tiles per row
+            const tile = document.createElement('div');
+            tile.className = 'tile';
+            tile.id = `tile-${i}-${j}`;
+            board.appendChild(tile);
+        }
+    }
+}
+initializeBoard();
+
+// Handle guess submission
+submit.addEventListener('click', () => {
+    const guess = input.value.toLowerCase();
+    if (guess.length !== 5) {
+        message.textContent = "Word must be 5 letters!";
+        return;
+    }
+    if (!words.includes(guess)) {
+        message.textContent = "Not a valid Taylor Swift word!";
+        return;
+    }
+
+    // Update board
+    for (let i = 0; i < 5; i++) {
+        const tile = document.getElementById(`tile-${currentRow}-${i}`);
+        tile.textContent = guess[i];
+        if (guess[i] === answer[i]) {
+            tile.classList.add('correct');
+        } else if (answer.includes(guess[i])) {
+            tile.classList.add('present');
+        } else {
+            tile.classList.add('absent');
+        }
+    }
+
+    // Check win/lose
+    if (guess === answer) {
+    message.textContent = `🎉 You guessed it! The word was "${answer}"!`;
+    input.disabled = true;
+    submit.disabled = true;
+    // Reload the page after 3 seconds
+    setTimeout(() => {
+        location.reload();
+    }, 3000); // 3000ms = 3 seconds
+    
+    } else if (currentRow === 5) {
+        message.textContent = `😢 Game over! The word was "${answer}".`;
+        input.disabled = true;
+        submit.disabled = true;
+    } else {
+        currentRow++;
+        input.value = '';
+        message.textContent = '';
+    }
+});
+
+    </script>
+</body>
+</html>
